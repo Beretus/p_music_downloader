@@ -31,8 +31,6 @@ list1 = get_artists_names()
 list2 = get_songs_names()
 songs_dict = dict(zip(list1, list2))
    
-# for k, v in songs_dict.items():
-#   print(k, " -> ", v)
 
 def download_yt(dict):
   for k,v in dict.items():
@@ -40,16 +38,13 @@ def download_yt(dict):
     for result in song.results:
       print(result.title)
       yt = YouTube(f'http://youtube.com/watch?v={result.video_id}')
-      stream = yt.streams.filter(only_audio=True)
+      stream_info = yt.streams.filter(only_audio=True)
+      stream = yt.streams.get_by_itag(stream_info[0].itag)
       stream.download()
       break
 
 
 download_yt(songs_dict)
-
-
-
-
 
 
 
