@@ -9,6 +9,8 @@ spotify = spotipy.Spotify(client_credentials_manager=SpotifyClientCredentials())
 
 playlist_id = '4AiQqiBwWiBBk0PWKIj1Qh' #ADD YOUR PLAYLIST ID
 
+download_path = "../Music"  
+
 playlist_items = spotify.playlist_items(playlist_id)
 song_name = playlist_items
 
@@ -40,7 +42,7 @@ def download_yt(dict):
       yt = YouTube(f'http://youtube.com/watch?v={result.video_id}')
       stream_info = yt.streams.filter(only_audio=True)
       stream = yt.streams.get_by_itag(stream_info[0].itag)
-      stream.download()
+      stream.download(download_path)
       break
 
 
